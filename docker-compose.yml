@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: appdirect-workshop
+    ports:
+      - "80:80"
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - FIRESTORE_PROJECT_ID=${FIRESTORE_PROJECT_ID}
+      - FIRESTORE_SUBDOC_ID=${FIRESTORE_SUBDOC_ID}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - CORS_ORIGIN=${CORS_ORIGIN:-*}
+    # For Cloud Run, use Application Default Credentials (ADC)
+    # No need to mount service account file
+    restart: unless-stopped
+    networks:
+      - appdirect-network
+
+networks:
+  appdirect-network:
+    driver: bridge
+
