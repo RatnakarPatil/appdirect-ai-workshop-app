@@ -1,6 +1,6 @@
 server {
     # Listen on PORT environment variable (Cloud Run requirement)
-    # Default to 8080 if PORT not set
+    # Cloud Run sends all traffic to this port
     listen ${PORT:-8080};
     server_name localhost;
     root /usr/share/nginx/html;
